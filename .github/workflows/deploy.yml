@@ -37,7 +37,13 @@ jobs:
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
             - name: Pull image
               run: docker pull leottaro/frambot:latest
-            - name: Stop the old container
-              run: (docker kill frambot ; docker rm frambot) &> /dev/null
+            - name: Stop and remove the old container if it exists
+              run: |
+                  if [ "$(docker ps -q -f name=frambot)" ]; then
+                    docker stop frambot
+                    docker rm frambot
+                  else
+                    echo "No container to stop"
+                  fi
             - name: Run container
               run: docker run --detach -e BOT_TOKEN=${{ secrets.BOT_TOKEN }} --name frambot --restart unless-stopped leottaro/frambot:latest
