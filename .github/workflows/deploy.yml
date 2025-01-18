@@ -22,7 +22,7 @@ jobs:
                   username: leottaro
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
             - name: Build for arm64 and push image
-              run: docker buildx build --platform linux/arm64,linux/amd64 -t leottaro/frambot:latest --push .
+              run: docker buildx build --debug --platform linux/arm64,linux/amd64 -t leottaro/frambot:latest --push .
 
     frambouase_deploy:
         runs-on: self-hosted
