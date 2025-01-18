@@ -3,16 +3,14 @@
         "target": "ESNext",
         "module": "ESNext",
         "outDir": "build",
-        "rootDir": "src",
         "strict": true,
         "moduleResolution": "Node",
         "allowSyntheticDefaultImports": true,
 
+        "allowUnreachableCode": false,
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": false,
-
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "emitDecoratorMetadata": false
     },
-    "exclude": ["build", "node_modules"]
+    "include": ["src"],
+    "exclude": ["build", "node_modules", ".github"]
 }
