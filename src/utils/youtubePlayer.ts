@@ -20,7 +20,7 @@ class YoutubePlayer {
     private channel?: VoiceBasedChannel;
     private connection?: VoiceConnection;
     private player: AudioPlayer;
-    private songs: string[] = [];
+    private queue: string[] = [];
 
     constructor() {
         this.player = createAudioPlayer();
@@ -61,14 +61,14 @@ class YoutubePlayer {
             });
         }
 
-        this.songs.push(video_id);
+        this.queue.push(video_id);
         this.play();
     }
 
     play(): void {
         this.player.unpause();
         if (!this.isPlaying()) {
-            this.player.play(createAudioResource(`${directory}/${this.songs.shift()}.mp3`));
+            this.player.play(createAudioResource(`${directory}/${this.queue.shift()}.mp3`));
         }
     }
 
@@ -77,7 +77,7 @@ class YoutubePlayer {
     }
 
     skip(): void {
-        const song = this.songs.shift();
+        const song = this.queue.shift();
         if (song) {
             this.player.play(createAudioResource(`${directory}/${song}.mp3`));
         } else {
@@ -86,7 +86,7 @@ class YoutubePlayer {
     }
 
     clear(): void {
-        this.songs = [];
+        this.queue = [];
         this.player.stop(true);
     }
 
@@ -96,6 +96,6 @@ class YoutubePlayer {
     getChannel = () => this.channel;
     getConnection = () => this.connection;
     getPlayer = () => this.player;
-    getSongs = () => this.songs;
+    getSongs = () => this.queue;
 }
 export default YoutubePlayer;

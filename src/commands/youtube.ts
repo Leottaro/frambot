@@ -1,16 +1,13 @@
 import type { CommandInteraction } from "discord.js";
 import { ApplicationCommandOptionType } from "discord.js";
-import { Discord, Slash, SlashOption } from "discordx";
+import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 import YoutubePlayer from "../utils/youtubePlayer.js";
 
 const youtube_player = new YoutubePlayer();
 @Discord()
-export class SlashCommands {
-    @Slash({ name: "ping", description: "Respond with pong!" })
-    async ping(interaction: CommandInteraction): Promise<void> {
-        interaction.reply("Pong!");
-    }
-
+@SlashGroup({ name: "youtube", description: "youtube player" })
+@SlashGroup("youtube")
+export class Youtube {
     @Slash({ name: "join", description: "join the same channel the user is in" })
     async join(interaction: CommandInteraction) {
         const member = interaction.guild?.members.cache.get(interaction.user.id);

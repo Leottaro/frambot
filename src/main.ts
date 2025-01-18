@@ -32,7 +32,7 @@ bot.once("ready", async () => {
     // This is useful when moving from guild commands to global commands
     // It must only be executed once
     //
-    // await bot.clearApplicationCommands(...bot.guilds.cache.map((g) => g.id));
+    await bot.clearApplicationCommands(...bot.guilds.cache.map((g) => g.id));
 
     console.log("Bot started");
 });
